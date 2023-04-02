@@ -20,20 +20,22 @@ function AddDish() {
             reader.readAsDataURL(e.target.files[0])
             reader.onload = (e) => {
                 setImage(e.target.result)
+                console.log(image)
             }
         }
     }
     const removeImage = () => {
         setImage(null)
     }
-    const handleSubmit = () => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
         const formData = new FormData()
         formData.append('name', name.current.value)
         formData.append('description', description.current.value)
         formData.append('cuisine', cuisine.current.value)
         formData.append('price', price.current.value)
         formData.append('time', time.current.value)
-        formData.append('photo', photo.current.value)
+        formData.append('photo', image)
 
         axios.post(ADD_DISH_ENDPOINT, formData,{
             headers:{Accept:'application/json'}
