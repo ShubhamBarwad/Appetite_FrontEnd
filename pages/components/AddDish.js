@@ -9,6 +9,7 @@ function AddDish() {
     const price = useRef(null)
     const time = useRef(null)
     const photo = useRef(null)
+    const tag = useRef(null)
     const [image, setImage] = useState(null)
 
     const handleClick = () => {
@@ -36,11 +37,19 @@ function AddDish() {
         formData.append('price', price.current.value)
         formData.append('time', time.current.value)
         formData.append('photo', image)
+        formData.append('tag', tag.current.value)
 
         axios.post(ADD_DISH_ENDPOINT, formData,{
             headers:{Accept:'application/json'}
         }).then((response) => {
             console.log(response)
+            name.current.value =  ''
+            description.current.value = ''
+            cuisine.current.value = ''
+            price.current.value = ''
+            time.current.value = ''
+            tag.current.value = ''
+            setImage(null)
         })
     }
 
@@ -53,6 +62,7 @@ function AddDish() {
         <input className='box' ref={cuisine} type="text" placeholder='cuisine' />
         <input className='box' ref={price} type="text" placeholder='price' />
         <input className='box' ref={time} type="text" placeholder='time' />
+        <input type="text" className="box" ref={tag} placeholder='tag' />
         {!image && (
         <div className="flex-row align-items-center justify-content-center gap-1 pointer" onClick={handleClick}>
             <i className="fi fi-rr-camera pointer"></i>
