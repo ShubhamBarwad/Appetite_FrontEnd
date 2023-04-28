@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import Dish from './Dish'
+import AdminDish from './AdminDish'
 import { useDispatch, useSelector } from 'react-redux'
 import { addAllPost, selectDish, selectPost } from '@/public/src/features/dishSlice'
 import axios from 'axios'
 
-function Dishes() {
+function Dishes({ session }) {
   const RES_ALL_DISHES_ENDPOINT = "http://localhost:8080/api/v1/dish"
   const RES_BY_PRICE_HL = "http://localhost:8080/api/v1/hightolow"
   const RES_BY_PRICE_LH = "http://localhost:8080/api/v1/lowtohigh"
@@ -15,7 +16,6 @@ function Dishes() {
     const fetchData = () =>{
       axios.get(RES_ALL_DISHES_ENDPOINT).then((response) => {
         if(response != null && count == 0){
-          console.log(response)
           dispatch(addAllPost(response.data));
           count++
         }
@@ -70,11 +70,15 @@ function Dishes() {
           </div>
         </div>
 
-        <div className="flex-row justify-content-center align-items-start wrap gap-2 width-100">
-            {dishes.map((dish) => (
-              <Dish dish={dish} key={dish.id}/>
+        <div className="flex-row justify-content-between align-items-start wrap width-100 gap-2">
+            {session.user.role == 'admin' ? dishes.map((dish) => (
+              <AdminDish dish={dish} key={dish.id} session={session}/>
+            )): dishes.map((dish) => (
+              <Dish dish={dish} key={dish.id} session={session}/>
             ))}
-            
+            {/* {dishes.map((dish) => (
+              <AdminDish dish={dish} key={dish.id} session={session}/>
+            ))} */}
             
         </div>
     </div>

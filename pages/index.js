@@ -4,13 +4,17 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import Header from './components/Header'
 import Dishes from './components/Dishes'
-import Login from './components/Login'
-import Register from './components/Register'
 import AddDish from './components/AddDish'
+import { useState } from 'react'
+import { useSession, signIn, signOut, getSession } from "next-auth/react"
+import { redirect } from 'next/dist/server/api-utils'
+import Cart from './components/Cart'
+import AdminDish from './components/AdminDish'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const {data:session} = useSession()
   return (
     <>
       <Head>
@@ -23,13 +27,27 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Header/>
-        {/* <Login/>
-        <Register/> */}
-        <Dishes/>
-
-        <AddDish/>
+        <Header session={session}/>
+        {Dishes({ session })}
+        {/* {AdminDish({ session })} */}
       </main>
     </>
   )
+}
+
+export async function getServerSideProps({req}){
+  const session = await getSession({req})
+
+  if(!session){
+    return{
+      redirect: {
+        destination: '/login',
+        permanent: false
+      }
+    }
+  }
+
+  return{
+    props: { session }
+  }
 }
