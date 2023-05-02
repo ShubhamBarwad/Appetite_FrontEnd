@@ -5,14 +5,12 @@ import { selectPost } from '@/public/src/features/dishSlice'
 import { useEffect } from 'react'
 import axios from 'axios'
 import { addAllCart, selectCart } from '@/public/src/features/cartSlice'
-import NoInCartContext from './noInCartContext'
 import { useContext } from 'react'
 
 function Cart({session, toggleCart}) {
   const CART_ITEMS_ENDPOINT = "http://localhost:8080/api/v1/cart"
   const dispatch = useDispatch()
   const cartItems = useSelector(selectCart)
-  const context = useContext(NoInCartContext)
   let count = 0
   useEffect(() => {
     const fetchData = () =>{
@@ -34,7 +32,7 @@ function Cart({session, toggleCart}) {
           <p className="level-2 heading">{session.user.name}'s Cart</p>
           <div className="cart-div flex-col justify-content-center align-items-center gap-1">
             {cartItems.map((cart) => (
-              <CartItem cart={cart} session={session} key={cart.id} cartNo={context.noInCart}/>
+              <CartItem cart={cart} session={session} key={cart.id}/>
             ))}
           </div>
             <button className="custom-btn pointer w-75">Checkout</button>

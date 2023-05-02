@@ -4,6 +4,7 @@ import AdminDish from './AdminDish'
 import { useDispatch, useSelector } from 'react-redux'
 import { addAllPost, selectDish, selectPost } from '@/public/src/features/dishSlice'
 import axios from 'axios'
+import AddDish from './AddDish'
 
 function Dishes({ session }) {
   const RES_ALL_DISHES_ENDPOINT = "http://localhost:8080/api/v1/dish"
@@ -59,7 +60,7 @@ function Dishes({ session }) {
 
 
   return (
-    <div className='page level-2 flex-col justify-content-center align-items-start gap-2'>
+    <div className='page level-2 flex-col justify-content-center align-items-center gap-2'>
         <div className='menu-title-filter flex-row justify-content-between align-items-center wrap gap-1'>
           <p className="level-1 strong">CHECKOUT OUT OUR MENU</p>
           <div className='menu-filter flex-row justify-content-between align-items-center gap-4'>
@@ -76,11 +77,8 @@ function Dishes({ session }) {
             )): dishes.map((dish) => (
               <Dish dish={dish} key={dish.id} session={session}/>
             ))}
-            {/* {dishes.map((dish) => (
-              <AdminDish dish={dish} key={dish.id} session={session}/>
-            ))} */}
-            
         </div>
+        {session.role == 'admin' && <AddDish/>}
     </div>
   )
 }

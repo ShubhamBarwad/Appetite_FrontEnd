@@ -10,6 +10,7 @@ import { useSession, signIn, signOut, getSession } from "next-auth/react"
 import { redirect } from 'next/dist/server/api-utils'
 import Cart from './components/Cart'
 import AdminDish from './components/AdminDish'
+import Footer from './components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -29,7 +30,7 @@ export default function Home() {
       <main className={styles.main}>
         <Header session={session}/>
         {Dishes({ session })}
-        {/* {AdminDish({ session })} */}
+        <Footer/>
       </main>
     </>
   )
@@ -37,7 +38,6 @@ export default function Home() {
 
 export async function getServerSideProps({req}){
   const session = await getSession({req})
-
   if(!session){
     return{
       redirect: {

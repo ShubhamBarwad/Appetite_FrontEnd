@@ -5,7 +5,6 @@ import axios from 'axios'
 import { headers } from '@/next.config'
 import { useDispatch } from 'react-redux'
 import { addAllCart, addCart } from '@/public/src/features/cartSlice'
-import NoInCartContext from './noInCartContext'
 import { useContext } from 'react'
 
 function Dish({ dish, session }) {
@@ -14,7 +13,6 @@ function Dish({ dish, session }) {
   const CART_ITEMS_ENDPOINT = "http://localhost:8080/api/v1/cart"
   const DELET_CART_ENDPOINT = "http://localhost:8080/api/v1/cart"
   let tag = dish.tag;
-  const context = useContext(NoInCartContext)
   const [noInCart, setNoInCart] = useState(0)
   const [added, setAdded] = useState(false)
   const dispatch = useDispatch()
@@ -38,6 +36,7 @@ function Dish({ dish, session }) {
     axios.post(ADD_CART_ENDPOINT, formData,{
       headers:{Accept:'application/json'}
     }).then((response) => {
+      console.log(response)
       checkInCart()
     })
   }

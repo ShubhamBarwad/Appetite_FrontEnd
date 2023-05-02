@@ -2,18 +2,19 @@ import store from '@/public/src/app/store'
 import '@/styles/globals.css'
 import { Provider } from 'react-redux'
 import { SessionProvider } from 'next-auth/react'
-import { useState } from 'react'
-import NoInCartContext from './components/noInCartContext'
+import { useState, createContext } from 'react'
+import RoleContext from './components/RoleContext'
 
 export default function App({ Component, pageProps }) {
   const [noInCart, setNoInCart] = useState(0)
+  const [role, setRole] = useState(null)
   return( 
     <SessionProvider session={pageProps.session}>
-      <NoInCartContext.Provider value={{noInCart, setNoInCart}}>
+      <RoleContext.Provider value={{role, setRole}}>
         <Provider store={store}>
           <Component {...pageProps} />
         </Provider>
-      </NoInCartContext.Provider>
+      </RoleContext.Provider>
     </SessionProvider>
   )
 }

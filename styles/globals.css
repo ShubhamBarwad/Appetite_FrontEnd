@@ -107,6 +107,9 @@ main{
 .font-light{
   color: var(--font-light);
 }
+.font-accent{
+  color: var(--accent);
+}
 header span{
   color: var(--accent);
 }
@@ -471,6 +474,13 @@ header h1{
 }
 .cart-number{
   width: 50px;
+}
+.footer{
+  background-color: var(--primary-1);
+  padding: 3rem;
+}
+.footer p{
+  color: var(--neutral-1);
 }
 
 
