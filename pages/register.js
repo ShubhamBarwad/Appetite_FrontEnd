@@ -32,6 +32,7 @@ function Register() {
   }
   return (
     <div className='full-screen flex-col align-items-center justify-content-center gap-1'>
+      <h1 className='login-logo logo heading'>Appetite<span>.</span></h1>
         <p className="level-1 strong">Register</p>
         <form className='flex-col align-items-center justify-content-center gap-2' onSubmit={formik.handleSubmit}>
             <input

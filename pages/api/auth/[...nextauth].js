@@ -42,7 +42,7 @@ export default NextAuth({
         jwt: ({ token, user }) => {
             if (user) {
             token.id = user.id;
-            token.name = user.username;
+            token.name = user.username || user.name;
             token.role = user.role;
         
             }

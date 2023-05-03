@@ -78,7 +78,7 @@ function Dishes({ session }) {
               <Dish dish={dish} key={dish.id} session={session}/>
             ))}
         </div>
-        {session.role == 'admin' && <AddDish/>}
+        {session.user.role == 'admin' && <AddDish/>}
     </div>
   )
 }

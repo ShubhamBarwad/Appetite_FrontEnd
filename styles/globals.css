@@ -317,6 +317,13 @@ header span{
 ::-webkit-scrollbar-thumb {
   display: none;
 }
+.login-logo{
+  font-weight: 400;
+  font-size: 4rem;
+}
+.login-logo span{
+  color: var(--accent);
+}
 
 
 /* Individual Styles */

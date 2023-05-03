@@ -39,6 +39,7 @@ function Login() {
 
   return (
     <div className='full-screen flex-col align-items-center justify-content-center gap-1'>
+      <h1 className='login-logo logo heading'>Appetite<span>.</span></h1>
         <p className="level-1 strong">LOGIN</p>
         <form className='flex-col align-items-center justify-content-center gap-2' onSubmit={formik.handleSubmit}>
             <input
@@ -57,7 +58,6 @@ function Login() {
              {formik.errors.password ? <span>{formik.errors.password}</span>:<></>}
             <button className='login-btn custom-btn pointer' type='submit'>Login</button>
             <button className="login-btn custom-btn pointer white-btn" onClick={handleGoogleSignIn}>Login with Google</button>
-            <button className="login-btn custom-btn pointer white-btn" onClick={handleGitSignIn}>Login with Github</button>
             <p>Dont have an account? <Link href='register'>register</Link></p>
         </form>
 
